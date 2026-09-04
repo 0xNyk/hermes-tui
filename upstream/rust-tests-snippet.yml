@@ -1,0 +1,21 @@
+# Append a job like this to hermes-agent .github/workflows/rust-tests.yml
+# when the crate lives at crates/tui/.
+
+  native-tui:
+    name: cargo test (native tui)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: crates/tui
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: cargo fmt
+        run: cargo fmt --all -- --check
+      - name: cargo clippy
+        run: cargo clippy --all-targets --locked -- -D warnings
+      - name: cargo test
+        run: cargo test --locked
