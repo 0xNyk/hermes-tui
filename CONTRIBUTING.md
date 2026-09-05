@@ -26,8 +26,9 @@ Do **not** replace Ink `ui-tui/` or flip `hermes --tui` in the first PR.
 1. Copy this crate to `crates/tui/` in [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent).
 2. Apply `upstream/launch_native.py` inside `_launch_tui` (opt-in `HERMES_TUI_NATIVE=1`).
 3. Add the crate to `.github/workflows/rust-tests.yml`.
-4. Update `docs/AGENT_PLAYBOOK.md` TUI Architecture.
+4. Update `AGENTS.md` (TUI tree) and `website/docs/user-guide/tui.md` if launch flags change.
 5. Use Conventional Commits (`feat(tui): …`) and the hermes-agent PR template.
 6. Search existing PRs for “native tui” / ratatui first.
+7. Sync with `scripts/sync-landing.sh <hermes-agent>/crates/tui` so `src/` and `Cargo.lock` match. The script keeps the landing `repository` URL.
 
 Ink stays the default until this client has soak time on macOS, Linux, and WSL2.
