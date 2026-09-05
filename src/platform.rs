@@ -886,14 +886,14 @@ mod tests {
 
     #[test]
     fn parse_branch_refs_marks_current_and_worktree() {
-        let text = "*|main|/Users/nyk/dev/hermes-tui\n |feat/picker|\n |other|/tmp/other\n";
+        let text = "*|main|/var/tmp/hermes-tui-src\n |feat/picker|\n |other|/tmp/other\n";
         let rows = parse_branch_refs(text);
         assert_eq!(rows.len(), 3);
         assert_eq!(rows[0].name, "main");
         assert!(rows[0].current);
         assert_eq!(
             rows[0].worktree.as_deref(),
-            Some("/Users/nyk/dev/hermes-tui")
+            Some("/var/tmp/hermes-tui-src")
         );
         assert!(!rows[1].current);
         assert!(rows[1].worktree.is_none());

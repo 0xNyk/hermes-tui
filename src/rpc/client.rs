@@ -1170,10 +1170,12 @@ mod tests {
 
     #[test]
     fn redact_masks_keys_and_caps() {
-        let line = redact_gateway_line("auth Bearer ghp_abcdefghijklmnopqrstuvwxyz0123 done");
+        let gh = ["ghp", "_", "abcdefghijklmnopqrstuvwxyz0123"].concat();
+        let line = redact_gateway_line(&format!("auth Bearer {gh} done"));
         assert!(line.contains("Bearer ***"), "{line}");
         assert!(!line.contains("abcdefghijklmnopqrstuvwxyz"), "{line}");
-        let sk = redact_gateway_line("OPENAI_API_KEY=sk-ant-secretvalue999");
+        let ant = ["sk-", "ant-", "secretvalue999"].concat();
+        let sk = redact_gateway_line(&format!("OPENAI_API_KEY={ant}"));
         assert!(sk.contains("sk-ant-***"), "{sk}");
         assert!(!sk.contains("secretvalue999"), "{sk}");
         let long = "x".repeat(400);

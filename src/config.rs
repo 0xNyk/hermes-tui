@@ -274,7 +274,7 @@ mod tests {
         let hint = missing_gateway_hint(Some(Path::new("/path/to/hermes-agent")));
         assert!(hint.contains("placeholder"), "{hint}");
         assert!(!hint.contains("export HERMES_PYTHON_SRC_ROOT=/path/to/hermes-agent\n"));
-        let real = missing_gateway_hint(Some(Path::new("/Users/nyk/dev/hermes-agent-v0.20.5")));
+        let real = missing_gateway_hint(Some(Path::new("/var/tmp/hermes-src")));
         assert!(real.contains("looked under"), "{real}");
         assert!(!real.contains("placeholder"), "{real}");
     }

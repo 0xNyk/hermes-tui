@@ -855,7 +855,7 @@ mod tests {
                 json!({
                     "name": "list_dir",
                     "tool_id": "t1",
-                    "args_text": "/Users/nyk/dev/hermes-tui"
+                    "args_text": "/var/tmp/hermes-tui-src"
                 }),
             ),
         );
@@ -865,7 +865,7 @@ mod tests {
             .iter()
             .find(|m| matches!(&m.role, MessageRole::Tool { name, .. } if name == "list_dir"))
             .expect("tool row");
-        assert!(tool.content.contains("hermes-tui"));
+        assert!(tool.content.contains("hermes-tui-src"));
         match &tool.role {
             MessageRole::Tool {
                 status, tool_id, ..
