@@ -584,16 +584,17 @@ impl GatewayClient {
         session_id: &str,
         request_id: &str,
         answer: &str,
+        question_id: Option<&str>,
     ) -> Result<Value> {
-        self.call(
-            "clarify.respond",
-            json!({
-                "session_id": session_id,
-                "request_id": request_id,
-                "answer": answer,
-            }),
-        )
-        .await
+        let mut params = json!({
+            "session_id": session_id,
+            "request_id": request_id,
+            "answer": answer,
+        });
+        if let Some(qid) = question_id {
+            params["question_id"] = json!(qid);
+        }
+        self.call("clarify.respond", params).await
     }
 
     pub async fn secret_respond(
